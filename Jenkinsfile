@@ -24,7 +24,8 @@ pipeline {
                 // This is a step defined in the shared library (see the top for the URL)
                 // (Or you could invoke this step using 'oc' commands!)
                 //binaryBuild(buildConfigName: appName, buildFromPath: ".")
-                sh 'mvn clean install' 
+                //sh 'mvn clean install' 
+                sh 'oc start-build appName --from-file=target/appName.jar --follow'
             }
         }
 
