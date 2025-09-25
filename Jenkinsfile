@@ -5,7 +5,7 @@
 
 // The name you want to give your Spring Boot application
 // Each resource related to your app will be given this name
-appName = "hello-java-spring-boot"
+//appName = "hello-java-spring-boot"
 
 pipeline {
     // Use the 'maven' Jenkins agent image which is provided with OpenShift 
@@ -25,7 +25,7 @@ pipeline {
                 // (Or you could invoke this step using 'oc' commands!)
                 //binaryBuild(buildConfigName: appName, buildFromPath: ".")
                 //sh 'mvn clean install' 
-                sh 'oc start-build appName --from-file=target/appName.jar --follow'
+                sh 'oc start-build hello-java-spring-boot --from-file=target/hello-java-spring-boot.jar --follow'
             }
         }
 
