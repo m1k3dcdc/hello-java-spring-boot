@@ -3,7 +3,7 @@
 FROM 3.9.11-sapmachine-11 as build
 WORKDIR /app
 COPY . .
-RUN mvn install
+RUN mvn clean install
 
 # Inject the JAR file into a new container to keep the file small
 FROM openjdk:11-jre-slim
