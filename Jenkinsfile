@@ -25,7 +25,8 @@ pipeline {
                 // (Or you could invoke this step using 'oc' commands!)
                 //binaryBuild(buildConfigName: appName, buildFromPath: ".")
                 //sh 'mvn clean install' 
-                sh 'oc start-build hello-java-spring-boot --from-file=target/hello-java-spring-boot.jar --follow'
+                //sh 'oc start-build hello-java-spring-boot --from-file=target/hello-java-spring-boot.jar --follow'
+                sh 'oc start-build hello-java-spring-boot --from-file=/app/app.jar --follow'                
             }
         }
 
