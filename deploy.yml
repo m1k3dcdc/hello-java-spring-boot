@@ -39,7 +39,7 @@ items:
         name: hello-java-spring-boot
       spec:
         containers:
-        - image: m1k3dcdc/hello-java-spring-boot:latest
+        - image: docker.io/m1k3dcdc/hello-java-spring-boot:latest
           imagePullPolicy: IfNotPresent
           name: hello-java-spring-boot
           env:
