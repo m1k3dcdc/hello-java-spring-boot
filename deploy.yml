@@ -40,7 +40,7 @@ items:
       spec:
         containers:
         - image: docker.io/m1k3pjem/hello-java-spring-boot:latest
-          imagePullPolicy: Always #IfNotPresent
+          imagePullPolicy: IfNotPresent   #Always
           name: hello-java-spring-boot
           env:
             - name: FAVOURITE_CHEESE
