@@ -38,7 +38,8 @@ pipeline {
             steps {
                 script {
                     //sh "oc rollout latest deploy/hello-java-spring-boot -n mavc23-dev"
-                    sh "oc create --save-config -f ."
+                    //sh "oc create --save-config -f ."
+                    sh "oc apply -f ."
                 }
             }
         }
