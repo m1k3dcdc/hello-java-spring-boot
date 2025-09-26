@@ -37,7 +37,8 @@ pipeline {
         stage('Deploy to OpenShift') {
             steps {
                 script {
-                    sh "oc rollout latest deploy/hello-java-spring-boot -n mavc23-dev"
+                    //sh "oc rollout latest deploy/hello-java-spring-boot -n mavc23-dev"
+                    sh "oc apply -f ."
                 }
             }
         }
