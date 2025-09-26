@@ -26,7 +26,9 @@ pipeline {
                 //binaryBuild(buildConfigName: appName, buildFromPath: ".")
                 //sh 'mvn clean install' 
                 //sh 'oc start-build hello-java-spring-boot --from-file=target/hello-java-spring-boot.jar --follow'
-                sh 'oc start-build hello-java-spring-boot --from-dir=.  --follow'
+                //sh 'oc start-build hello-java-spring-boot --from-dir=.  --follow'
+                //openshift.selector("bc", "hello-java-spring-boot").startBuild("--follow") 
+                openshift.selector("bc", "hello-java-spring-boot").startBuild("--from-dir=.", "--follow")
             }
         }
 
