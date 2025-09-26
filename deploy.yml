@@ -19,7 +19,7 @@ items:
         deployment: hello-java-spring-boot
       sessionAffinity: None
       type: ClusterIP
-  - apiVersion: apps/v1
+  - apiVersion: v1
     kind: Deployment
     metadata:
       labels:
@@ -45,6 +45,7 @@ items:
               env:
                 - name: FAVOURITE_CHEESE
                   valueFrom:
+                    #ConfigMapKeySelector
                     configMapKeyRef: my-configmap
                     key: thefavourite.cheese
               ports:
