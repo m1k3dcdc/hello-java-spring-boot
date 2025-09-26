@@ -46,7 +46,7 @@ items:
                 - name: FAVOURITE_CHEESE
                   valueFrom:
                     configMapKeyRef:
-                      name: hello-java-spring-boot
+                      name: my-configmap
                       key: thefavourite.cheese
               ports:
                 - containerPort: 8080
