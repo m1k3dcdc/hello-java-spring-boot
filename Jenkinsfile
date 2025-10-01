@@ -25,7 +25,7 @@ pipeline {
                 // (Or you could invoke this step using 'oc' commands!)
                 //binaryBuild(buildConfigName: "openshift-build.yaml", buildFromPath: ".")
                 //sh 'oc start-build hello-java-spring-boot --from-dir=.  --follow'
-                sh 'oc start-build hello-java-spring-boot --from-file=./openshift-build.yaml --follow'
+                sh 'oc start-build hello-java-spring-boot --from-file="openshift-build.yaml" --follow'
                 //openshift.selector("bc", "hello-java-spring-boot").startBuild("--from-dir=.", "--follow")
             }
         }
