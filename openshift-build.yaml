@@ -4,14 +4,14 @@ items:
 - apiVersion: build.openshift.io/v1
   kind: BuildConfig
   metadata:
-    labels:
-      app.kubernetes.io/name: hello-java-spring-boot
     name: hello-java-spring-boot
+    labels:
+      app.kubernetes.io/name: hello-java-spring-boot    
   spec:
     output:
       to:
         kind: DockerImage
-        name: docker.io/m1k3dcdc/hello-java-spring-boot:latest
+        name: docker.io/m1k3pjem/hello-java-spring-boot:latest
     source:
       # Expect a local directory to be streamed to OpenShift as a build source
       type: Binary
