@@ -30,7 +30,7 @@ items:
     metadata:
       name: hello-java-spring-boot-route-unsecured
     spec:
-      host: www.example.com
+      #host: www.example.com
       to:
         kind: Service
         name: hello-java-spring-boot
