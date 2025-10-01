@@ -30,10 +30,15 @@ items:
     metadata:
       name: hello-java-spring-boot-route-unsecured
     spec:
-      #host: www.example.com
+      host: www.example.com
+      path: "/cheese"
+      port: 8080
       to:
         kind: Service
         name: hello-java-spring-boot
+       tls:
+         termination: edge
+         insecureEdgeTerminationPolicy: Allow
   - apiVersion: apps/v1
     kind: Deployment
     metadata:
