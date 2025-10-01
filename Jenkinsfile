@@ -23,7 +23,7 @@ pipeline {
                 // This uploads your application's source code and performs a binary build in OpenShift
                 // This is a step defined in the shared library (see the top for the URL)
                 // (Or you could invoke this step using 'oc' commands!)
-                binaryBuild(buildConfigName: hello-java-spring-boot, buildFromPath: ".")
+                binaryBuild(buildConfigName: "openshift-build.yaml", buildFromPath: ".")
                 //sh 'oc start-build hello-java-spring-boot --from-dir=.  --follow'
                 //openshift.selector("bc", "hello-java-spring-boot").startBuild("--follow") 
                 //openshift.selector("bc", "hello-java-spring-boot").startBuild("--from-dir=.", "--follow")
