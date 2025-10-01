@@ -25,6 +25,15 @@ items:
         deployment: hello-java-spring-boot
       sessionAffinity: None
       type: ClusterIP
+  - apiVersion: route.openshift.io/v1
+    kind: Route
+    metadata:
+      name: hello-java-spring-boot-route-unsecured
+    spec:
+      host: www.example.com
+      to:
+        kind: Service
+        name: hello-java-spring-boot
   - apiVersion: apps/v1
     kind: Deployment
     metadata:
