@@ -6,7 +6,8 @@ items:
     metadata:
       name: my-configmap
       data:
-        key: thefavourite.cheese
+        thefavourite.cheese: OAXACA
+        #key: thefavourite.cheese        
   - apiVersion: v1
     kind: Service
     metadata:
