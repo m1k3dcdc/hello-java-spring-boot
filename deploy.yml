@@ -1,44 +1,6 @@
 apiVersion: v1
 kind: List
 items:
-  - apiVersion: v1
-    kind: ConfigMap
-    metadata:
-      name: my-configmap
-    data:
-      thefavourite.cheese: OAXACA
-  - apiVersion: v1
-    kind: Service
-    metadata:
-      labels:
-        app: hello-java-spring-boot
-        app.kubernetes.io/component: hello-java-spring-boot
-        app.kubernetes.io/instance: hello-java-spring-boot
-      name: hello-java-spring-boot
-    spec:
-      ports:
-        - name: 8080-tcp
-          port: 8080
-          protocol: TCP
-          targetPort: 8080
-      selector:
-        deployment: hello-java-spring-boot
-      sessionAffinity: None
-      type: ClusterIP
-  - apiVersion: route.openshift.io/v1
-    kind: Route
-    metadata:
-      name: hello-java-spring-boot-route-unsecured
-    spec:
-      host: www.example.com
-      path: "/cheese"
-      port: 8080
-      to:
-        kind: Service
-        name: hello-java-spring-boot
-       tls:
-         termination: edge
-         insecureEdgeTerminationPolicy: Allow
   - apiVersion: apps/v1
     kind: Deployment
     metadata:
@@ -60,15 +22,53 @@ items:
         spec:
           containers:
             - image: docker.io/m1k3pjem/hello-java-spring-boot:latest
-              imagePullPolicy: IfNotPresent #Always
+              imagePullPolicy: IfNotPresent
               name: hello-java-spring-boot
               env:
                 - name: FAVOURITE_CHEESE
                   valueFrom:
                     configMapKeyRef:
-                      name: my-configmap
+                      name: hello-java-spring-boot-configmap
                       key: thefavourite.cheese
               ports:
                 - containerPort: 8080
                   protocol: TCP
           restartPolicy: Always
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      labels:
+        app: hello-java-spring-boot-service
+        app.kubernetes.io/component: hello-java-spring-boot-service
+        app.kubernetes.io/instance: hello-java-spring-boot-service
+      name: hello-java-spring-boot-service
+    spec:
+      ports:
+        - name: 8080-tcp
+          port: 8080
+          protocol: TCP
+          targetPort: 8080
+      selector:
+        deployment: hello-java-spring-boot
+      sessionAffinity: None
+      type: ClusterIP
+  - apiVersion: route.openshift.io/v1
+    kind: Route
+    metadata:
+      name: hello-java-spring-boot-route
+    spec:
+      #host: www.example.com
+      #path: /cheese
+      port: 8080
+      to:
+        kind: Service
+        name: hello-java-spring-boot-service
+      tls:
+        termination: edge
+        insecureEdgeTerminationPolicy: Allow
+  - apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: hello-java-spring-boot-configmap
+    data:
+      thefavourite.cheese: OAXACA
