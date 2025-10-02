@@ -28,21 +28,22 @@ pipeline {
                 //openshift.selector("bc", "hello-java-spring-boot").startBuild("--from-dir=.", "--follow")
                 sh '''
                   #oc start-build --from-build=<build_name>
-                  oc start-build -F hello-java-spring-boot --from-dir=./api/
+                  #oc start-build -F hello-java-spring-boot --from-dir=./api/
+                  oc start-build hello-java-spring-boot --from-dir=.  --follow
                   '''
             }
         }
 
         // You could extend the pipeline by tagging the image,
         // or deploying it to a production environment, etc......
-      /*  stage('Deploy to OpenShift') {
+        stage('Deploy to OpenShift') {
             steps {
                 script {
                     //sh "oc rollout latest deploy/hello-java-spring-boot -n mavc23-dev"
                     //sh "oc create --save-config -f ."
-                    sh "oc create -f ."
+                    sh "oc create --save-config -f . -n mavc23-dev"
                 }
             }
-        }*/
+        }
     }
 }
