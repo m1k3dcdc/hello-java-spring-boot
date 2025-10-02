@@ -47,7 +47,7 @@ items:
         - name: 8080-tcp
           port: 8080
           protocol: TCP
-          targetPort: 8080
+          targetPort: "8080-tcp"
       selector:
         deployment: hello-java-spring-boot
       sessionAffinity: None
