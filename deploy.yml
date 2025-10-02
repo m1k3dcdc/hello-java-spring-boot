@@ -38,9 +38,9 @@ items:
     kind: Service
     metadata:
       labels:
-        app: hello-java-spring-boot-service
-        app.kubernetes.io/component: hello-java-spring-boot-service
-        app.kubernetes.io/instance: hello-java-spring-boot-service
+        app: hello-java-spring-boot
+        app.kubernetes.io/component: hello-java-spring-boot
+        app.kubernetes.io/instance: hello-java-spring-boot
       name: hello-java-spring-boot-service
     spec:
       ports:
@@ -55,6 +55,10 @@ items:
   - apiVersion: v1
     kind: ConfigMap
     metadata:
+      labels:
+          app: hello-java-spring-boot
+          app.kubernetes.io/component: hello-java-spring-boot
+          app.kubernetes.io/instance: hello-java-spring-boot
       name: hello-java-spring-boot-configmap
     data:
       thefavourite.cheese: OAXACA
