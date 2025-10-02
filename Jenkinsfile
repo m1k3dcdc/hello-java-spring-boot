@@ -36,14 +36,14 @@ pipeline {
               openshift.withCluster() {
                 openshift.withProject("mavc23-dev") {
     
-                  def deployment = openshift.selector("dc", "hello-java-spring-boot")
+                  def deployment = openshift.selector("deployment", "hello-java-spring-boot")
     
                   if(!deployment.exists()){
-                    openshift.newApp('hello-java-spring-boot', "--as-deployment-config").narrow('svc').expose()
+                    openshift.newApp('hello-java-spring-boot', "--as-deployment").narrow('svc').expose()
                   }
     
                   timeout(5) { 
-                    openshift.selector("dc", "hello-java-spring-boot").related('pods').untilEach(1) {
+                    openshift.selector("deployment", "hello-java-spring-boot").related('pods').untilEach(1) {
                       return (it.object().status.phase == "Running")
                       }
                     }
