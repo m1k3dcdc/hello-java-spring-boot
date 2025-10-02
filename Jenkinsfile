@@ -22,7 +22,7 @@ pipeline {
                     if(!buildConfigExists){
                         openshift.newBuild("--name=hello-java-spring-boot", "--docker-image=docker.io/m1k3pjem/hello-java-spring-boot", "--binary")
                     }    
-                    openshift.selector("bc", "hello-java-spring-boot").startBuild("--from-file=/app/app.jar", "--follow")    
+                    openshift.selector("bc", "hello-java-spring-boot").startBuild("--from-dir=.", "--follow")    
                 }    
               }
             }
