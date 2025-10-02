@@ -39,7 +39,7 @@ pipeline {
                   def deployment = openshift.selector("dc", "hello-java-spring-boot")
     
                   if(!deployment.exists()){
-                    openshift.newApp('hello-java-spring-boot', "--as-deployment").narrow('svc').expose()
+                    openshift.newApp('hello-java-spring-boot', "--as-deployment-config").narrow('svc').expose()
                   }
     
                   timeout(5) { 
