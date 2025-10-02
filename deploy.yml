@@ -49,7 +49,7 @@ items:
           protocol: TCP
           targetPort: "8080-tcp"
       selector:
-        deployment: hello-java-spring-boot
+        deploymentconfig: hello-java-spring-boot
       sessionAffinity: None
       type: ClusterIP
   - apiVersion: v1
