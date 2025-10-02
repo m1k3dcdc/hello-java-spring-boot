@@ -35,14 +35,14 @@ pipeline {
 
         // You could extend the pipeline by tagging the image,
         // or deploying it to a production environment, etc......
-        stage('Deploy to OpenShift') {
+      /*  stage('Deploy to OpenShift') {
             steps {
                 script {
                     //sh "oc rollout latest deploy/hello-java-spring-boot -n mavc23-dev"
                     //sh "oc create --save-config -f ."
-                    //sh "oc create -f ."
+                    sh "oc create -f ."
                 }
             }
-        }
+        }*/
     }
 }
