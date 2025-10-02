@@ -1,9 +1,7 @@
 // Based on:
 // https://raw.githubusercontent.com/redhat-cop/container-pipelines/master/basic-spring-boot/Jenkinsfile
 pipeline {
-    agent {
-        label "maven"
-    }
+    agent any
     
     stages {
         stage('Build') {
