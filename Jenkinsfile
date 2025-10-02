@@ -39,14 +39,10 @@ pipeline {
                   def deployment = openshift.selector("dc", "hello-java-spring-boot")
     
                   if(!deployment.exists()){
-                    openshift.newApp('hello-java-spring-boot', "--as-deployment-config").narrow('svc').expose()
+                    //openshift.newApp('hello-java-spring-boot', "--as-deployment-config").narrow('svc').expose()
+                    sh "oc apply -f . -n mavc23-dev"
                   }
     
-                  timeout(5) { 
-                    openshift.selector("dc", "hello-java-spring-boot").related('pods').untilEach(1) {
-                      return (it.object().status.phase == "Running")
-                      }
-                    }
                 }
               }
             }
