@@ -22,23 +22,36 @@ pipeline {
                     if(!buildConfigExists){
                         openshift.newBuild("--name=hello-java-spring-boot", "--docker-image=docker.io/m1k3pjem/hello-java-spring-boot", "--binary")
                     }    
-                    openshift.selector("bc", "hello-java-spring-boot").startBuild("--from-dir=.", "--follow")    
+                    openshift.selector("bc", "hello-java-spring-boot").startBuild("--from-file=target/app.jar", "--follow")    
                 }    
               }
             }
           }
         }
-        
-        // You could extend the pipeline by tagging the image,
-        // or deploying it to a production environment, etc......
-        stage('Deploy to OpenShift') {
-            steps {
-                script {
-                    //sh "oc rollout latest deploy/hello-java-spring-boot -n mavc23-dev"
-                    //sh "oc create --save-config -f ."
-                    sh "oc apply -f . -n mavc23-dev"
+
+        stage('Deploy') {
+          steps {
+            echo 'Deploying....'
+            script {
+              openshift.withCluster() {
+                openshift.withProject("mavc23-dev") {
+    
+                  def deployment = openshift.selector("dc", "hello-java-spring-boot")
+    
+                  if(!deployment.exists()){
+                    openshift.newApp('hello-java-spring-boot', "--as-deployment-config").narrow('svc').expose()
+                  }
+    
+                  timeout(5) { 
+                    openshift.selector("dc", "hello-java-spring-boot").related('pods').untilEach(1) {
+                      return (it.object().status.phase == "Running")
+                      }
+                    }
                 }
+              }
             }
+          }
         }
+
     }
 }
