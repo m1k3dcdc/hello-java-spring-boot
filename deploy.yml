@@ -52,22 +52,6 @@ items:
         deployment: hello-java-spring-boot
       sessionAffinity: None
       type: ClusterIP
-  - apiVersion: route.openshift.io/v1
-    kind: Route
-    metadata:
-      name: hello-java-spring-boot-route
-    spec:
-      #host: www.example.com
-      #path: /cheese
-      port:
-        targetPort: 8080
-      to:
-        kind: Service
-        name: hello-java-spring-boot-service
-        weight: 100
-      tls:
-        termination: edge
-        insecureEdgeTerminationPolicy: Redirect
   - apiVersion: v1
     kind: ConfigMap
     metadata:
