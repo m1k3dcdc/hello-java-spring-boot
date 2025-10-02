@@ -60,7 +60,7 @@ items:
       #host: www.example.com
       #path: /cheese
       port:
-        targetPort: 8080-tcp
+        targetPort: 8080
       to:
         kind: Service
         name: hello-java-spring-boot-service
