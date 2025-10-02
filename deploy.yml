@@ -59,13 +59,15 @@ items:
     spec:
       #host: www.example.com
       #path: /cheese
-      port: 8080
+      port:
+        targetPort: 8080-tcp
       to:
         kind: Service
         name: hello-java-spring-boot-service
+        weight: 100
       tls:
         termination: edge
-        insecureEdgeTerminationPolicy: Allow
+        insecureEdgeTerminationPolicy: Redirect
   - apiVersion: v1
     kind: ConfigMap
     metadata:
