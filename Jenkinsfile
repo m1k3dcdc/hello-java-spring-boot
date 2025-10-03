@@ -4,12 +4,6 @@ pipeline {
     agent any
     
     stages {
-        stage("Checkout") {
-            steps {
-                checkout scm
-            }
-        }
-
         stage('Create Container Image') {
           steps {
             echo 'Create Container Image..'
