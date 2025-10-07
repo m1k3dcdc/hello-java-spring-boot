@@ -11,12 +11,12 @@ pipeline {
             script {
               openshift.withCluster() {
                 openshift.withProject("mavc23-dev") {
-                    def buildConfigExists = openshift.selector("bc", "hello-java-spring-boot").exists()
+                    def buildConfigExists = openshift.selector("bc", "hello-java-spring-boot-bc").exists()
     
                     if(!buildConfigExists){
-                        openshift.newBuild("--name=hello-java-spring-boot", "--docker-image=docker.io/m1k3pjem/hello-java-spring-boot", "--binary")
+                        openshift.newBuild("--name=hello-java-spring-boot-bc", "--image=docker.io/m1k3pjem/hello-java-spring-boot", "--binary")
                     }    
-                    openshift.selector("bc", "hello-java-spring-boot").startBuild("--from-dir=.", "--follow")    
+                    openshift.selector("bc", "hello-java-spring-boot-bc").startBuild("--from-dir=.", "--follow")    
                 }    
               }
             }
