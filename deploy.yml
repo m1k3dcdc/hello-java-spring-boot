@@ -61,4 +61,4 @@ items:
           app.kubernetes.io/instance: hello-java-spring-boot
       name: hello-java-spring-boot-configmap
     data:
-      thefavourite.cheese: OAXACA
+      thefavourite.cheese: GOUDA
