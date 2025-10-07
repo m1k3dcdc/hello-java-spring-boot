@@ -8,7 +8,7 @@ items:
         app: hello-java-spring-boot
         app.kubernetes.io/component: hello-java-spring-boot
         app.kubernetes.io/instance: hello-java-spring-boot
-      name: hello-java-spring-boot
+      name: hello-java-spring-boot-deploy
     spec:
       replicas: 1
       selector:
