@@ -27,13 +27,16 @@ pipeline {
                     
                     echo "### BuildConfig: " + APP_NAME + " exists, start new build to update app ..."
                     if (!buildConfigExists) {
+                        echo "### newBuild " + APP_NAME + " does not exist" 
                         openshift.newBuild("--name=hello-java-spring-boot-bc", "--image=docker.io/m1k3pjem/hello-java-spring-boot", "--binary")
 
                         if (!openshift.selector("route", APP_NAME).exists()) {
                             echo "### Route " + APP_NAME + " does not exist, exposing service ..." 
                             //def service = openshift.selector("service", APP_NAME)
                             //service.expose()
-                        }
+                        } else {
+                            echo "### Route " + APP_NAME + " exist" 
+                        }    
                     }    
                     openshift.selector("bc", "hello-java-spring-boot-bc").startBuild("--from-dir=.", "--follow")    
                 }    
