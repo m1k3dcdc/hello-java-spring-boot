@@ -3,7 +3,7 @@
 pipeline {
     options {
         // set a timeout of 60 minutes for this pipeline
-        timeout(time: 10, unit: 'MINUTES')
+        timeout(time: 5, unit: 'MINUTES')
     }
 
     environment {
@@ -28,6 +28,12 @@ pipeline {
                     echo "### BuildConfig: " + APP_NAME + " exists, start new build to update app ..."
                     if (!buildConfigExists) {
                         openshift.newBuild("--name=hello-java-spring-boot-bc", "--image=docker.io/m1k3pjem/hello-java-spring-boot", "--binary")
+
+                        if (!openshift.selector("route", APP_NAME).exists()) {
+                            echo "### Route " + APP_NAME + " does not exist, exposing service ..." 
+                            //def service = openshift.selector("service", APP_NAME)
+                            //service.expose()
+                        }
                     }    
                     openshift.selector("bc", "hello-java-spring-boot-bc").startBuild("--from-dir=.", "--follow")    
                 }    
